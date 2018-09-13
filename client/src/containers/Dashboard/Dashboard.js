@@ -11,8 +11,10 @@ class Dashboard extends Component {
   render() {
     return (
       <StyledDashboard>
-        <CardPreview />
+        {/* CardInfo must be rendered before CardPreview
+        ReduxForm must be connected before accessing to store */}
         <CardInfo />
+        <CardPreview />
       </StyledDashboard>
     );
   }
