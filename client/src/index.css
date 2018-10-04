@@ -4,3 +4,8 @@ body {
   box-sizing: border-box;
   font-family: sans-serif;
 }
+
+@font-face {
+  font-family: Cooper_Black;
+  src: url('./assets/fonts/Cooper_Black.ttf');
+}

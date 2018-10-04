@@ -1,7 +1,7 @@
 import React, { Component, } from "react";
 import styled from "styled-components";
-import CardPreview from "../../components/CardPreview/CardPreview";
-import CardInfo from "../../components/CardInfo/CardInfo";
+import CardPreview from "../CardPreview/CardPreview";
+import CardInfo from "../CardInfo/CardInfo";
 
 const StyledDashboard = styled.div`
   display: flex;
