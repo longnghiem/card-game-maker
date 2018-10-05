@@ -52,7 +52,6 @@ let cardInfo = (props) => {
             <Field name="cardNumber" component="input" type="text" placeholder="Card Number" />
           </div>
         </div>
-
         <div>
           <label>Ability</label>
           <div className="input-section">

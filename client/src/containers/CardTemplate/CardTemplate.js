@@ -14,6 +14,7 @@ const StyledCardTemplate = styled.div`
   position: relative;
   background-image: url(${props => props.fileUrl || cloudTea});
   background-size: cover;
+  margin: 0 auto;
 `;
 
 const CardOverlay = styled.div`
@@ -76,12 +77,6 @@ const StyledCardName = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  .hero-name {
-    background: -webkit-linear-gradient(#aaa, ${props => props.fontColor || "#222"});
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
 `;
 const StyledAbility = styled.div`
   width: 230px;
@@ -96,23 +91,23 @@ const StyledAbility = styled.div`
 
 const CardTemplate = (props) => {
   const {
-    borderColor, heroName, ability, cardNumber, fileUrl,
+    borderColor, heroName, ability, cardNumber, fileUrl, forwardingRef,
   } = props;
   return (
-    <StyledCardTemplate borderColor={borderColor} fileUrl={fileUrl}>
-      <CardOverlay color={borderColor}>
-        <img src={cardOverlay} alt="curve left" />
-        <div className="left-gradient" />
-      </CardOverlay>
-      <StyledCardNumber fontColor={borderColor}> {cardNumber}</StyledCardNumber>
-      <StyledContentWrapper color={borderColor}>
-        <div className="separator" />
-        <StyledCardName fontColor={borderColor}>
-          <div className="hero-name">{heroName}</div>
-        </StyledCardName>
-        <StyledAbility fontColor={borderColor}> {ability}</StyledAbility>
-      </StyledContentWrapper>
-    </StyledCardTemplate>
+    <div ref={forwardingRef}>
+      <StyledCardTemplate borderColor={borderColor} fileUrl={fileUrl}>
+        <CardOverlay color={borderColor}>
+          <img src={cardOverlay} alt="curve left" />
+          <div className="left-gradient" />
+        </CardOverlay>
+        <StyledCardNumber fontColor={borderColor}> {cardNumber}</StyledCardNumber>
+        <StyledContentWrapper color={borderColor}>
+          <div className="separator" />
+          <StyledCardName fontColor={borderColor}>{heroName}</StyledCardName>
+          <StyledAbility fontColor={borderColor}> {ability}</StyledAbility>
+        </StyledContentWrapper>
+      </StyledCardTemplate>
+    </div>
   );
 };
 
@@ -122,6 +117,7 @@ CardTemplate.propTypes = {
   heroName: PropTypes.string.isRequired,
   ability: PropTypes.string.isRequired,
   cardNumber: PropTypes.string.isRequired,
+  forwardingRef: PropTypes.shape({}).isRequired,
 };
 
 CardTemplate.defaultProps = {
@@ -136,4 +132,8 @@ const mapStateToProps = state => ({
   cardNumber: state.form.cardInfo.values.cardNumber,
 });
 
-export default connect(mapStateToProps)(CardTemplate);
+const ConnectedCardTemplate = connect(mapStateToProps)(CardTemplate);
+
+export default React.forwardRef((props, ref) => (
+  <ConnectedCardTemplate {...props} forwardingRef={ref} />
+));
