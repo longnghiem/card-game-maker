@@ -84,7 +84,7 @@ const StyledCardName = styled.div`
   }
 `;
 const StyledAbility = styled.div`
-  width: 65%;
+  width: 230px;
   margin-top: 35px;
   margin-right: 20px;
   margin-left: 100px;
@@ -108,7 +108,6 @@ const CardTemplate = (props) => {
       <StyledContentWrapper color={borderColor}>
         <div className="separator" />
         <StyledCardName fontColor={borderColor}>
-          {" "}
           <div className="hero-name">{heroName}</div>
         </StyledCardName>
         <StyledAbility fontColor={borderColor}> {ability}</StyledAbility>

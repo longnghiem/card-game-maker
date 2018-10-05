@@ -60,7 +60,9 @@ let cardInfo = (props) => {
           </div>
         </div>
         <SketchPicker onChange={handleChange} color={bdColor} />
+        <br />
         <div>
+          <label>Hero Image </label>
           <input type="file" onChange={fileSelectedHandler} />
         </div>
       </form>
