@@ -4,7 +4,7 @@ import { Field, reduxForm, } from "redux-form";
 import PropTypes from "prop-types";
 import { SketchPicker, } from "react-color";
 import { connect, } from "react-redux";
-import setBorderColor from "../../store/actions/cardTemplateActions";
+import { setBorderColor, setHeroImage, } from "../../store/actions/cardTemplateActions";
 
 const StyledCardInfo = styled.div`
   border: 1px black solid;
@@ -28,7 +28,12 @@ const StyledCardInfo = styled.div`
 `;
 
 let cardInfo = (props) => {
-  const { handleSubmit, setBdColor, bdColor, } = props;
+  const {
+    handleSubmit, setBdColor, bdColor, setImage,
+  } = props;
+  const fileSelectedHandler = (event) => {
+    setImage(URL.createObjectURL(event.target.files[0]));
+  };
   const handleChange = (color) => {
     setBdColor(color.hex);
   };
@@ -56,7 +61,7 @@ let cardInfo = (props) => {
         </div>
         <SketchPicker onChange={handleChange} color={bdColor} />
         <div>
-          <input type="file" />
+          <input type="file" onChange={fileSelectedHandler} />
         </div>
       </form>
     </StyledCardInfo>
@@ -66,6 +71,7 @@ let cardInfo = (props) => {
 cardInfo.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   setBdColor: PropTypes.func.isRequired,
+  setImage: PropTypes.func.isRequired,
   bdColor: PropTypes.string,
 };
 
@@ -79,6 +85,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setBdColor: color => dispatch(setBorderColor(color)),
+  setImage: uploadedFileUrl => dispatch(setHeroImage(uploadedFileUrl)),
 });
 
 cardInfo = connect(

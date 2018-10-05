@@ -12,7 +12,7 @@ const StyledCardTemplate = styled.div`
   border-color: ${props => props.borderColor || "#222"};
   border-radius: 0.6em;
   position: relative;
-  background-image: url(${cloudTea});
+  background-image: url(${props => props.fileUrl || cloudTea});
   background-size: cover;
 `;
 
@@ -96,10 +96,10 @@ const StyledAbility = styled.div`
 
 const CardTemplate = (props) => {
   const {
-    borderColor, heroName, ability, cardNumber,
+    borderColor, heroName, ability, cardNumber, fileUrl,
   } = props;
   return (
-    <StyledCardTemplate borderColor={borderColor}>
+    <StyledCardTemplate borderColor={borderColor} fileUrl={fileUrl}>
       <CardOverlay color={borderColor}>
         <img src={cardOverlay} alt="curve left" />
         <div className="left-gradient" />
@@ -119,13 +119,19 @@ const CardTemplate = (props) => {
 
 CardTemplate.propTypes = {
   borderColor: PropTypes.string.isRequired,
+  fileUrl: PropTypes.string,
   heroName: PropTypes.string.isRequired,
   ability: PropTypes.string.isRequired,
   cardNumber: PropTypes.string.isRequired,
 };
 
+CardTemplate.defaultProps = {
+  fileUrl: cloudTea,
+};
+
 const mapStateToProps = state => ({
   borderColor: state.cardTemplate.cardBorderColor,
+  fileUrl: state.cardTemplate.fileUrl,
   heroName: state.form.cardInfo.values.heroName,
   ability: state.form.cardInfo.values.ability,
   cardNumber: state.form.cardInfo.values.cardNumber,
