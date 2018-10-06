@@ -4,7 +4,7 @@ import { Field, reduxForm, } from "redux-form";
 import PropTypes from "prop-types";
 import { SketchPicker, } from "react-color";
 import { connect, } from "react-redux";
-import { setBorderColor, setHeroImage, } from "../../store/actions/cardTemplateActions";
+import { setBorderColor, setHeroImage, } from "../../store/actions/cardBuilderActions";
 
 const StyledCardInfo = styled.div`
   border: 1px black solid;
@@ -81,7 +81,7 @@ cardInfo.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  bdColor: state.cardTemplate.bdColor,
+  bdColor: state.cardBuilder.bdColor,
 });
 
 const mapDispatchToProps = dispatch => ({

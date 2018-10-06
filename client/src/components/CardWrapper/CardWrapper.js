@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { connect, } from "react-redux";
 import cloudTea from "../../assets/images/cloudTea.jpg";
 import cardOverlay from "../../assets/images/overlay.png";
 
-const StyledCardTemplate = styled.div`
+const StyledCardWrapper = styled.div`
   height: 485px;
   width: 346px;
   border: 20px solid;
@@ -89,51 +88,33 @@ const StyledAbility = styled.div`
   color: ${props => props.fontColor || "#222"};
 `;
 
-const CardTemplate = (props) => {
+const cardWrapper = (props) => {
   const {
-    borderColor, heroName, ability, cardNumber, fileUrl, forwardingRef,
+    borderColor, fileUrl, heroName, cardNumber, ability,
   } = props;
   return (
-    <div ref={forwardingRef}>
-      <StyledCardTemplate borderColor={borderColor} fileUrl={fileUrl}>
-        <CardOverlay color={borderColor}>
-          <img src={cardOverlay} alt="curve left" />
-          <div className="left-gradient" />
-        </CardOverlay>
-        <StyledCardNumber fontColor={borderColor}> {cardNumber}</StyledCardNumber>
-        <StyledContentWrapper color={borderColor}>
-          <div className="separator" />
-          <StyledCardName fontColor={borderColor}>{heroName}</StyledCardName>
-          <StyledAbility fontColor={borderColor}> {ability}</StyledAbility>
-        </StyledContentWrapper>
-      </StyledCardTemplate>
-    </div>
+    <StyledCardWrapper borderColor={borderColor} fileUrl={fileUrl}>
+      <CardOverlay color={borderColor}>
+        <img src={cardOverlay} alt="curve left" />
+        <div className="left-gradient" />
+      </CardOverlay>
+      <StyledCardNumber fontColor={borderColor}> {cardNumber}</StyledCardNumber>
+      <StyledContentWrapper color={borderColor}>
+        <div className="separator" />
+        <StyledCardName fontColor={borderColor}>{heroName}</StyledCardName>
+        <StyledAbility fontColor={borderColor}> {ability}</StyledAbility>
+      </StyledContentWrapper>
+    </StyledCardWrapper>
   );
 };
 
-CardTemplate.propTypes = {
+cardWrapper.propTypes = {
   borderColor: PropTypes.string.isRequired,
-  fileUrl: PropTypes.string,
+  fileUrl: PropTypes.string.isRequired,
   heroName: PropTypes.string.isRequired,
   ability: PropTypes.string.isRequired,
   cardNumber: PropTypes.string.isRequired,
   forwardingRef: PropTypes.shape({}).isRequired,
 };
 
-CardTemplate.defaultProps = {
-  fileUrl: cloudTea,
-};
-
-const mapStateToProps = state => ({
-  borderColor: state.cardTemplate.cardBorderColor,
-  fileUrl: state.cardTemplate.fileUrl,
-  heroName: state.form.cardInfo.values.heroName,
-  ability: state.form.cardInfo.values.ability,
-  cardNumber: state.form.cardInfo.values.cardNumber,
-});
-
-const ConnectedCardTemplate = connect(mapStateToProps)(CardTemplate);
-
-export default React.forwardRef((props, ref) => (
-  <ConnectedCardTemplate {...props} forwardingRef={ref} />
-));
+export default cardWrapper;

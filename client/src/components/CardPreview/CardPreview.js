@@ -1,7 +1,7 @@
 import React, { Component, } from "react";
 import styled from "styled-components";
 import domToImage from "dom-to-image";
-import CardTemplate from "../../containers/CardTemplate/CardTemplate";
+import CardBuilder from "../../containers/CardBuilder/CardBuilder";
 
 const StyledCardPreview = styled.div`
   border: 1px black solid;
@@ -32,7 +32,7 @@ class CardPreview extends Component {
   render() {
     return (
       <StyledCardPreview>
-        <CardTemplate ref={this.previewDiv} />
+        <CardBuilder ref={this.previewDiv} />
         <button type="button" onClick={this.convertToPngAndDownload}>
           Download
         </button>

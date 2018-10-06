@@ -1,5 +1,5 @@
 import { combineReducers, } from "redux";
 import { reducer as formReducer, } from "redux-form";
-import cardTemplateReducer from "./cardTemplateReducer";
+import cardBuilderReducer from "./cardBuilderReducer";
 
-export default combineReducers({ form: formReducer, cardTemplate: cardTemplateReducer, });
+export default combineReducers({ form: formReducer, cardBuilder: cardBuilderReducer, });
