@@ -7,13 +7,13 @@ import cardOverlay from "../../assets/images/overlay.png";
 const StyledCardWrapper = styled.div`
   height: 485px;
   width: 346px;
-  border: 20px solid;
+  border: 1em solid;
   border-color: ${props => props.borderColor || "#222"};
   border-radius: 0.6em;
   position: relative;
   background-image: url(${props => props.fileUrl || cloudTea});
   background-size: cover;
-  margin: 0 auto;
+  margin: auto;
 `;
 
 const CardOverlay = styled.div`
@@ -21,10 +21,10 @@ const CardOverlay = styled.div`
   top: 0;
   left: 0;
   height: 100%;
-  opacity: 1;
-
+  width: 100%;
   img {
     height: 100%;
+    width: 100%;
   }
 
   .left-gradient {
@@ -46,10 +46,8 @@ const CardOverlay = styled.div`
 
 const StyledCardNumber = styled.div`
   position: absolute;
-  bottom: 0;
-  left: 0;
-  margin-bottom: 15px;
-  margin-left: 25px;
+  bottom: 3%;
+  left: 6%;
   color: ${props => props.fontColor || "#222"};
   font-size: 96px;
   font-family: Cooper_Black;
@@ -59,16 +57,17 @@ const StyledContentWrapper = styled.div`
   position: relative;
   top: 65%;
   .separator {
-    margin-left: 53px;
+    margin-left: 15%;
     height: 5px;
     width: 85%;
     background-image: linear-gradient(to bottom, ${props => props.color || "#222"}, gray);
+    border-radius: 20%;
   }
 `;
 
 const StyledCardName = styled.div`
-  margin-top: 5px;
-  margin-left: 60px;
+  margin-top: 1%;
+  margin-left: 20%;
   font-size: 30px;
   font-weight: 800;
   font-family: Cooper_Black;
@@ -78,10 +77,10 @@ const StyledCardName = styled.div`
   align-items: center;
 `;
 const StyledAbility = styled.div`
-  width: 230px;
-  margin-top: 35px;
-  margin-right: 20px;
-  margin-left: 100px;
+  width: 65%;
+  margin-top: 10%;
+  position: relative;
+  left: 30%;
   font-size: 16px;
   font-weight: 600;
   font-family: "Calibri";
@@ -98,11 +97,17 @@ const cardWrapper = (props) => {
         <img src={cardOverlay} alt="curve left" />
         <div className="left-gradient" />
       </CardOverlay>
-      <StyledCardNumber fontColor={borderColor}> {cardNumber}</StyledCardNumber>
+      <StyledCardNumber className="card-number" fontColor={borderColor}>
+        {cardNumber}
+      </StyledCardNumber>
       <StyledContentWrapper color={borderColor}>
         <div className="separator" />
-        <StyledCardName fontColor={borderColor}>{heroName}</StyledCardName>
-        <StyledAbility fontColor={borderColor}> {ability}</StyledAbility>
+        <StyledCardName className="card-name" fontColor={borderColor}>
+          {heroName}
+        </StyledCardName>
+        <StyledAbility className="ability" fontColor={borderColor}>
+          {ability}
+        </StyledAbility>
       </StyledContentWrapper>
     </StyledCardWrapper>
   );
@@ -110,11 +115,17 @@ const cardWrapper = (props) => {
 
 cardWrapper.propTypes = {
   borderColor: PropTypes.string.isRequired,
-  fileUrl: PropTypes.string.isRequired,
+  fileUrl: PropTypes.string,
   heroName: PropTypes.string.isRequired,
   ability: PropTypes.string.isRequired,
   cardNumber: PropTypes.string.isRequired,
-  forwardingRef: PropTypes.shape({}).isRequired,
+  forwardingRef: PropTypes.shape({}),
+};
+
+cardWrapper.defaultProps = {
+  forwardingRef: {},
+  fileUrl: cloudTea,
 };
 
 export default cardWrapper;
+export { StyledCardName, };

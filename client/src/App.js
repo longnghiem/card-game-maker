@@ -1,8 +1,7 @@
 import React from "react";
 import { Switch, Route, } from "react-router-dom";
 import NewCardPanel from "./components/NewCardPanel/NewCardPanel";
-
-const Dashboard = () => <h1>DASHBOARD</h1>;
+import Dashboard from "./containers/Dashboard/Dashboard";
 
 const App = () => (
   <div className="App">

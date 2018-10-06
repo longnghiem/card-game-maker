@@ -9,19 +9,24 @@ import { setBorderColor, setHeroImage, } from "../../store/actions/cardBuilderAc
 const StyledCardInfo = styled.div`
   border: 1px black solid;
   width: 50%;
+  min-width: 420px;
   padding: 1em;
   margin: 1em;
 
+  label {
+    color: #48483a;
+    font-weight: Bold;
+  }
   textarea {
     height: 100px;
+    resize: none;
   }
-
   input,
   textarea {
     width: 220px;
     margin: 0.5em 0;
+    padding: 0.5em;
   }
-
   .input-section {
     margin-bottom: 0.5em;
   }
@@ -61,7 +66,7 @@ let cardInfo = (props) => {
         <SketchPicker onChange={handleChange} color={bdColor} />
         <br />
         <div>
-          <label>Hero Image </label>
+          <label>Upload Hero Image </label> <br />
           <input type="file" onChange={fileSelectedHandler} />
         </div>
       </form>

@@ -6,6 +6,7 @@ import CardBuilder from "../../containers/CardBuilder/CardBuilder";
 const StyledCardPreview = styled.div`
   border: 1px black solid;
   width: 50%;
+  min-width: 420px;
   display: flex;
   flex-direction: column;
   justify-content: center;
