@@ -8,11 +8,14 @@ import CardWrapper from "../../components/CardWrapper/CardWrapper";
 
 const StyledDashboard = styled.div`
   display: flex;
+  flex-wrap: wrap;
   padding: 2em;
+  margin-top: 7em;
 
   & > div {
     width: 173px;
     height: 246px;
+    margin-bottom: 1em;
   }
 
   .card-name {
