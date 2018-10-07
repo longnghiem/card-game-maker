@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import cloudTea from "../../assets/images/cloudTea.jpg";
-import cardOverlay from "../../assets/images/overlay.png";
+import cardOverlay from "../../assets/images/overlay2.png";
 
 const StyledCardWrapper = styled.div`
   height: 485px;
