@@ -4,7 +4,7 @@ import domToImage from "dom-to-image";
 import CardBuilder from "../../containers/CardBuilder/CardBuilder";
 
 const StyledCardPreview = styled.div`
-  border: 1px black solid;
+  border: 1px #91651c solid;
   width: 50%;
   min-width: 420px;
   display: flex;
@@ -14,7 +14,18 @@ const StyledCardPreview = styled.div`
   margin: 1em;
 
   button {
-    margin: 1em auto;
+    margin: 2em auto 1em;
+    width: 100px;
+    height: 40px;
+    font-weight: 600;
+    background: #e0d553;
+    color: #2c2906;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+  }
+  button:hover {
+    box-shadow: 2px 2px #2c2906;
   }
 `;
 

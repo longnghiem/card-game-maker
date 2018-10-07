@@ -16,6 +16,7 @@ const StyledDashboard = styled.div`
     width: 173px;
     height: 246px;
     margin-bottom: 1em;
+    border-width: 0.5em;
   }
 
   .card-name {

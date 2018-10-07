@@ -57,11 +57,11 @@ const StyledContentWrapper = styled.div`
   position: relative;
   top: 65%;
   .separator {
-    margin-left: 15%;
+    margin-left: 16.5%;
     height: 5px;
-    width: 85%;
+    width: 84%;
     background-image: linear-gradient(to bottom, ${props => props.color || "#222"}, gray);
-    border-radius: 20%;
+    border-radius: 10%;
   }
 `;
 
@@ -128,4 +128,3 @@ cardWrapper.defaultProps = {
 };
 
 export default cardWrapper;
-export { StyledCardName, };
