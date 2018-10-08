@@ -1,7 +1,10 @@
 import React, { Component, } from "react";
 import styled from "styled-components";
 import domToImage from "dom-to-image";
+import PropTypes from "prop-types";
+import { connect, } from "react-redux";
 import CardBuilder from "../../containers/CardBuilder/CardBuilder";
+import { getHeroName, } from "../../store/reducers";
 
 const StyledCardPreview = styled.div`
   border: 1px #91651c solid;
@@ -33,9 +36,10 @@ class CardPreview extends Component {
   previewDiv = React.createRef();
 
   convertToPngAndDownload = () => {
+    const { heroName, } = this.props;
     domToImage.toPng(this.previewDiv.current).then((dataUrl) => {
       const link = document.createElement("a");
-      link.download = "image.png";
+      link.download = `${heroName}.png`;
       link.href = dataUrl;
       link.click();
     });
@@ -53,4 +57,12 @@ class CardPreview extends Component {
   }
 }
 
-export default CardPreview;
+CardPreview.propTypes = {
+  heroName: PropTypes.string.isRequired,
+};
+
+const mapStateToProps = state => ({
+  heroName: getHeroName(state),
+});
+
+export default connect(mapStateToProps)(CardPreview);

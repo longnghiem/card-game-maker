@@ -3,6 +3,13 @@ import PropTypes from "prop-types";
 import { connect, } from "react-redux";
 import CardWrapper from "../../components/CardWrapper/CardWrapper";
 import cloudTea from "../../assets/images/cloudTea.jpg";
+import {
+  getAbility,
+  getHeroName,
+  getCardNumber,
+  getBdColor,
+  getFileUrl,
+} from "../../store/reducers";
 
 const CardBuilder = (props) => {
   const {
@@ -35,11 +42,11 @@ CardBuilder.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  borderColor: state.cardBuilder.cardBorderColor,
-  fileUrl: state.cardBuilder.fileUrl,
-  heroName: state.form.cardInfo.values.heroName,
-  ability: state.form.cardInfo.values.ability,
-  cardNumber: state.form.cardInfo.values.cardNumber,
+  borderColor: getBdColor(state),
+  fileUrl: getFileUrl(state),
+  heroName: getHeroName(state),
+  ability: getAbility(state),
+  cardNumber: getCardNumber(state),
 });
 
 const ConnectedCardBuilder = connect(mapStateToProps)(CardBuilder);

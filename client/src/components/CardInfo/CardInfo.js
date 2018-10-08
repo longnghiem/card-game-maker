@@ -6,6 +6,7 @@ import { SketchPicker, } from "react-color";
 import { connect, } from "react-redux";
 import axios from "axios";
 import { setBorderColor, setHeroImage, } from "../../store/actions/cardBuilderActions";
+import { getBdColor, } from "../../store/reducers";
 
 const StyledCardInfo = styled.div`
   border: 1px #91651c solid;
@@ -161,7 +162,7 @@ cardInfo.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  bdColor: state.cardBuilder.bdColor,
+  bdColor: getBdColor(state),
 });
 
 const mapDispatchToProps = dispatch => ({

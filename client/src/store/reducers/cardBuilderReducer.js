@@ -1,7 +1,7 @@
 import { SET_BORDER_COLOR, SET_HERO_IMAGE, } from "../actions/types";
 
 const initialState = {
-  cardBorderColor: "",
+  cardBorderColor: "#222",
   fileUrl: null,
 };
 
