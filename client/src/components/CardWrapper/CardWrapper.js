@@ -8,7 +8,7 @@ const StyledCardWrapper = styled.div`
   height: 485px;
   width: 346px;
   border: 1em solid;
-  border-color: ${props => props.borderColor || "#222"};
+  border-color: ${props => props.color || "#222"};
   border-radius: 0.6em;
   position: relative;
   background-image: url(${props => props.fileUrl || cloudTea});
@@ -57,9 +57,9 @@ const StyledContentWrapper = styled.div`
   position: relative;
   top: 65%;
   .separator {
-    margin-left: 16.5%;
+    margin-left: 15.2%;
     height: 5px;
-    width: 84%;
+    width: 85%;
     background-image: linear-gradient(to bottom, ${props => props.color || "#222"}, gray);
     border-radius: 10%;
   }
@@ -89,23 +89,23 @@ const StyledAbility = styled.div`
 
 const cardWrapper = (props) => {
   const {
-    borderColor, fileUrl, heroName, cardNumber, ability,
+    selectedColor, fileUrl, heroName, cardNumber, ability,
   } = props;
   return (
-    <StyledCardWrapper borderColor={borderColor} fileUrl={fileUrl}>
-      <CardOverlay color={borderColor}>
+    <StyledCardWrapper color={selectedColor} fileUrl={fileUrl}>
+      <CardOverlay color={selectedColor}>
         <img src={cardOverlay} alt="curve left" />
         <div className="left-gradient" />
       </CardOverlay>
-      <StyledCardNumber className="card-number" fontColor={borderColor}>
+      <StyledCardNumber className="card-number" fontColor={selectedColor}>
         {cardNumber}
       </StyledCardNumber>
-      <StyledContentWrapper color={borderColor}>
+      <StyledContentWrapper color={selectedColor}>
         <div className="separator" />
-        <StyledCardName className="card-name" fontColor={borderColor}>
+        <StyledCardName className="card-name" fontColor={selectedColor}>
           {heroName}
         </StyledCardName>
-        <StyledAbility className="ability" fontColor={borderColor}>
+        <StyledAbility className="ability" fontColor={selectedColor}>
           {ability}
         </StyledAbility>
       </StyledContentWrapper>
@@ -114,7 +114,7 @@ const cardWrapper = (props) => {
 };
 
 cardWrapper.propTypes = {
-  borderColor: PropTypes.string.isRequired,
+  selectedColor: PropTypes.string.isRequired,
   fileUrl: PropTypes.string,
   heroName: PropTypes.string.isRequired,
   ability: PropTypes.string.isRequired,

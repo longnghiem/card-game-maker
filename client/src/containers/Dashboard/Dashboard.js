@@ -2,23 +2,27 @@ import React, { Component, } from "react";
 import { connect, } from "react-redux";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import fetchCardsAction from "../../store/actions/dashboardActions";
+import { Link, } from "react-router-dom";
+import { fetchCards as fetchCardsAction, } from "../../store/actions/dashboardActions";
 import { getCards, } from "../../store/reducers";
 import CardWrapper from "../../components/CardWrapper/CardWrapper";
 
 const StyledDashboard = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
   padding: 2em;
   margin-top: 7em;
 
-  & > div {
+  a > div {
     width: 173px;
     height: 246px;
-    margin-bottom: 1em;
+    margin: 1em;
     border-width: 0.5em;
   }
-
+  a {
+    text-decoration: none;
+  }
   .card-name {
     font-size: 15px;
   }
@@ -27,6 +31,9 @@ const StyledDashboard = styled.div`
   }
   .card-number {
     font-size: 48px;
+  }
+  .separator {
+    height: 3px;
   }
 `;
 
@@ -39,14 +46,15 @@ class Dashboard extends Component {
   render() {
     const { cards, } = this.props;
     const renderingCards = cards.map(card => (
-      <CardWrapper
-        key={card._id}
-        borderColor={card.borderColor}
-        fileUrl={card.fileUrl}
-        heroName={card.heroName}
-        cardNumber={card.cardNumber}
-        ability={card.ability}
-      />
+      <Link to={`/editCard/${card._id}`} key={card._id}>
+        <CardWrapper
+          selectedColor={card.color}
+          fileUrl={card.fileUrl}
+          heroName={card.heroName}
+          cardNumber={card.cardNumber}
+          ability={card.ability}
+        />
+      </Link>
     ));
     return <StyledDashboard>{renderingCards}</StyledDashboard>;
   }

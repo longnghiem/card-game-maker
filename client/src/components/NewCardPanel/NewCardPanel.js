@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import CardPreview from "../CardPreview/CardPreview";
-import CardInfo from "../CardInfo/CardInfo";
+import CardFormWrapper from "../../containers/CardFormWrapper/CardFormWrapper";
 
 const StyledNewCardPanel = styled.div`
   display: flex;
@@ -11,9 +11,9 @@ const StyledNewCardPanel = styled.div`
 
 const newCardPanel = props => (
   <StyledNewCardPanel>
-    {/* CardInfo must be rendered before CardPreview
+    {/* CardFormWrapper must be rendered before CardPreview
         ReduxForm must be connected before accessing to store */}
-    <CardInfo {...props} />
+    <CardFormWrapper {...props} />
     <CardPreview />
   </StyledNewCardPanel>
 );

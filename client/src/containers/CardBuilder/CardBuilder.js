@@ -4,21 +4,17 @@ import { connect, } from "react-redux";
 import CardWrapper from "../../components/CardWrapper/CardWrapper";
 import cloudTea from "../../assets/images/cloudTea.jpg";
 import {
-  getAbility,
-  getHeroName,
-  getCardNumber,
-  getBdColor,
-  getFileUrl,
+  getAbility, getHeroName, getCardNumber, getColor, getFileUrl,
 } from "../../store/reducers";
 
 const CardBuilder = (props) => {
   const {
-    borderColor, heroName, ability, cardNumber, fileUrl, forwardingRef,
+    color, heroName, ability, cardNumber, fileUrl, forwardingRef,
   } = props;
   return (
     <div ref={forwardingRef}>
       <CardWrapper
-        borderColor={borderColor}
+        selectedColor={color}
         fileUrl={fileUrl}
         heroName={heroName}
         ability={ability}
@@ -29,7 +25,7 @@ const CardBuilder = (props) => {
 };
 
 CardBuilder.propTypes = {
-  borderColor: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
   fileUrl: PropTypes.string,
   heroName: PropTypes.string.isRequired,
   ability: PropTypes.string.isRequired,
@@ -42,7 +38,7 @@ CardBuilder.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  borderColor: getBdColor(state),
+  color: getColor(state),
   fileUrl: getFileUrl(state),
   heroName: getHeroName(state),
   ability: getAbility(state),

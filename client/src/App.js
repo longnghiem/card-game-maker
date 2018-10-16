@@ -10,6 +10,7 @@ const App = () => (
     <Switch>
       <Route path="/" exact component={Dashboard} />
       <Route path="/newCard" exact component={NewCardPanel} />
+      <Route path="/editCard/:id" exact component={NewCardPanel} />
     </Switch>
   </div>
 );

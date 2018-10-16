@@ -1,14 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Field, reduxForm, } from "redux-form";
-import PropTypes from "prop-types";
 import { SketchPicker, } from "react-color";
-import { connect, } from "react-redux";
-import axios from "axios";
-import { setBorderColor, setHeroImage, } from "../../store/actions/cardBuilderActions";
-import { getBdColor, } from "../../store/reducers";
+import { Field, reduxForm, propTypes as reduxFormPropTypes, } from "redux-form";
 
-const StyledCardInfo = styled.div`
+const StyledCardForm = styled.div`
   border: 1px #91651c solid;
   width: 50%;
   min-width: 420px;
@@ -91,25 +86,16 @@ const StyledCardInfo = styled.div`
     }
   }
 `;
-const submitHandler = (values, dispatch, props) => {
-  axios.post("/api/cards", values).then((res) => {
-    props.history.push("/");
-  });
-};
 
-let cardInfo = (props) => {
+const cardForm = (props) => {
   const {
-    setBdColor, bdColor, setImage, change, handleSubmit,
+    handleSubmit, onFileSelected, selectedColor, change,
   } = props;
-  const fileSelectedHandler = (event) => {
-    setImage(URL.createObjectURL(event.target.files[0]));
-  };
-  const handleChange = (color) => {
-    setBdColor(color.hex);
-    change("borderColor", color.hex);
+  const colorPickerChangedHandler = (color) => {
+    change("color", color.hex);
   };
   return (
-    <StyledCardInfo>
+    <StyledCardForm>
       <form onSubmit={handleSubmit}>
         <div className="input-section hero-name">
           <label>Hero Name</label>
@@ -135,54 +121,34 @@ let cardInfo = (props) => {
             <Field name="fileUrl" component="input" type="text" placeholder="Url" />
           </div>
         </div>
-        <SketchPicker className="color-picker" onChange={handleChange} color={bdColor} />
-        <Field name="borderColor" component="input" type="hidden" />
+        <SketchPicker
+          className="color-picker"
+          onChange={colorPickerChangedHandler}
+          color={selectedColor}
+        />
+        <Field name="color" component="input" type="hidden" />
         <br />
         <div className="upload-image">
           <label>Upload Hero Image </label> <br />
-          <input type="file" onChange={fileSelectedHandler} />
+          <input type="file" onChange={onFileSelected} />
         </div>
         <button type="submit">Save card </button>
       </form>
-    </StyledCardInfo>
+    </StyledCardForm>
   );
 };
 
-cardInfo.propTypes = {
-  setBdColor: PropTypes.func.isRequired,
-  setImage: PropTypes.func.isRequired,
-  change: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  bdColor: PropTypes.string,
-  history: PropTypes.shape({}).isRequired,
+cardForm.propTypes = {
+  ...reduxFormPropTypes,
 };
-
-cardInfo.defaultProps = {
-  bdColor: "#222",
-};
-
-const mapStateToProps = state => ({
-  bdColor: getBdColor(state),
-});
-
-const mapDispatchToProps = dispatch => ({
-  setBdColor: color => dispatch(setBorderColor(color)),
-  setImage: uploadedFileUrl => dispatch(setHeroImage(uploadedFileUrl)),
-});
-
-cardInfo = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(cardInfo);
 
 export default reduxForm({
   form: "cardInfo",
-  initialValues: {
+  /* initialValues: {
     heroName: "Cloud Tea",
     ability: "If this card is in your hand and is looked at by another player, you are eliminated.",
     cardNumber: "1",
-    borderColor: "#222",
-  },
-  onSubmit: submitHandler,
+    color: "#222",
+  }, */
   enableReinitialize: true,
-})(cardInfo);
+})(cardForm);

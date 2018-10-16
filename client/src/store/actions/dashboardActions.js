@@ -1,7 +1,7 @@
 import axios from "axios";
 import { FETCH_CARDS, } from "./types";
 
-const fetchCards = () => (dispatch) => {
+export const fetchCards = () => (dispatch) => {
   axios.get("/api/cards").then((res) => {
     dispatch({
       type: FETCH_CARDS,
@@ -10,4 +10,12 @@ const fetchCards = () => (dispatch) => {
   });
 };
 
-export default fetchCards;
+export const addCard = values => (dispatch) => {
+  console.log(values);
+  axios
+    .post("/api/cards", values)
+    .then((res) => {
+      dispatch(fetchCards());
+    })
+    .catch(e => console.log(e));
+};

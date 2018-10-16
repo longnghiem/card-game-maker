@@ -57,7 +57,7 @@ const NavBar = () => (
   <StyledNavBar>
     <div>
       <div className="header">
-        <img src={NavIcon} />
+        <img src={NavIcon} alt="header icon" />
         LN Card Maker
       </div>
       <Link to="/">Dashboard</Link>

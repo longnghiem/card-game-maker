@@ -14,7 +14,7 @@ const cardSchema = new Schema({
 		type: String,
 		required: true,
 	},
-	borderColor: {
+	color: {
 		type: String,
 		required: true,
 	},
